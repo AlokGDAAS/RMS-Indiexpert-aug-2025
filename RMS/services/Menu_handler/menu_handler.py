@@ -51,18 +51,17 @@ class Menu_Handler:
         
 
     def show_item_id(self):
-            print("---------------------")
+            print("-"*50)
             print("     All Items id    ")
-            print("---------------------")
-            print("name:              id")
-            print("---------------------")
+            print("-"*50)
+            print("name:              id              category")
+            print("-"*50)
             for item in self.menu_data:
-                print(f"{item["name"]:<15} : {item["item_id"]}")  
-            print("---------------------")     
+                print(f"{item["name"]:<20} : {item["item_id"]:<8} {item["category"]}")  
+            print("-"*50)   
     
 
-    def show_categories(self):
-        return self.category_data
+
     
 
     def edit_categories(self):
@@ -95,6 +94,63 @@ class Menu_Handler:
                 break
             else:
                 print("Invalid choice. Try again.")
+
+    def update_menu(self):
+        self.show_item_id()
+        item_id = input("Please provide item id: ").strip()
+
+        found = False
+        for i in self.menu_data:
+            if i["item_id"] == item_id:
+                found = True
+                print("What do you want to update?")
+                print("1. Item ID")
+                print("2. Name")
+                print("3. Price")
+                print("4. Category")
+
+                choice = input("Enter your choice: ").lower()
+
+                if choice in ["1", "item id"]:
+                    new_id = input("Provide new item id: ").strip()
+                    if new_id:
+                        i["item_id"] = new_id
+
+                elif choice in ["2", "name"]:
+                    new_name = input("Provide new name: ").strip()
+                    if new_name:
+                        i["name"] = new_name
+
+                elif choice in ["3", "price"]:
+                    for size in ["full", "half", "quarter"]:
+                        new_price = input(f"Enter new price for {size} (leave blank to keep current): ").strip()
+                        if new_price:
+                            i["price"][size] = new_price
+
+                elif choice in ["4", "category"]:
+                    cat_list = self.category_data
+                    for idx, cat in enumerate(cat_list, start=1):
+                        print(f"{idx}. {cat}")
+                    try:
+                        new_cat_index = int(input("Choose a category number: "))
+                        if 1 <= new_cat_index <= len(cat_list):
+                            i["category"] = cat_list[new_cat_index - 1]
+                    except ValueError:
+                        print("Invalid category choice.")
+
+                break  # stop loop once found
+
+        if not found:
+            print("Item ID not found.")
+        else:
+            self.save_data()
+            print("Updated successfully.")
+
+
+
+
+                  
+    
 
 
     def add(self, record):
@@ -147,8 +203,9 @@ class Menu_Handler:
             print("1. Add Items")     
             print("2. Delete items")
             print("3. Show items id")
-            print("4. Show menu")
-            print("5. Back to previous menu")
+            print("4. Show menu")            
+            print("5. Update/Edit menu")
+            print("6. Back to previous menu")
         
             choice = input("Choose an option: ")
 
@@ -210,10 +267,14 @@ class Menu_Handler:
                 self.show_menu()           
 
             elif choice == "5":
-               
-                break       
+                self.update_menu()    
+         
+
+            elif choice == "6":
+                break
+                           
+                     
 
             else:
                 print("Invalid choice. Try again.")
-
 
