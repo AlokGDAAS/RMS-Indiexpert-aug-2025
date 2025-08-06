@@ -274,7 +274,7 @@ class Bill_Handler:
             print("\nOnly generated bills can be paid.")
 
             # Find the bill
-            order_id = input("Please enter order id for which bill has been generated: ").strip()
+            order_id = input("Please enter order id for payment which bill has been generated: ").strip()
             bill = None
 
             for i in self.bill_data:
