@@ -1,0 +1,12 @@
+2025-08-06 10:30:23 - Unexpected error: invalid literal for int() with base 10: 's'
+Traceback (most recent call last):
+  File "c:\Users\DotNet\Desktop\Coding\Indi\RMS git hub folder for modification\RMS-modification\RMS\manager.py", line 48, in run
+    choice = int(input("Choose an option number or name: ").strip().lower())
+ValueError: invalid literal for int() with base 10: 's'
+
+2025-08-06 10:31:21 - Unexpected error: invalid literal for int() with base 10: 'w'
+Traceback (most recent call last):
+  File "c:\Users\DotNet\Desktop\Coding\Indi\RMS git hub folder for modification\RMS-modification\RMS\manager.py", line 48, in run
+    choice = int(input("Choose an option number or name: ").strip().lower())
+ValueError: invalid literal for int() with base 10: 'w'
+
